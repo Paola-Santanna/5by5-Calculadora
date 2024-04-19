@@ -1,89 +1,103 @@
 ﻿//Leia dois números, faça as quatro operações e mostre os resultados
-float adicao, subtracao, multiplicacao, divisao, numero_1, numero_2;
-int escolha = 1, operacao;
-bool liberar = false;
+float adicao, subtracao, multiplicacao, divisao, numero_1, numero_2, aux_1, aux_2;
+int escolha = 1, operacao, aux_operacao;
+bool liberar_1 = false, liberar_2 = false;
+
+Console.WriteLine("--- Calculadora ---\n");
 
 do
 {
-    Console.Write("\nDigite um número: ");
+    Console.Write("Digite um número: ");
     numero_1 = float.Parse(Console.ReadLine());
+    aux_1 = numero_1;
     Console.Write("Digite outro número: ");
     numero_2 = float.Parse(Console.ReadLine());
+    aux_2 = numero_2;
 
-    Console.Write("Digite o número correspondente à operação desejada:\n");
-    Console.Write("1 para Adição");
-    Console.Write("2 para Subtração");
-    Console.Write("3 para Multiplicação");
-    Console.Write("4 para Divisão");
+    Console.WriteLine("\nDigite o número correspondente à operação desejada:\n");
+    Console.WriteLine("1 para Adição");
+    Console.WriteLine("2 para Subtração");
+    Console.WriteLine("3 para Multiplicação");
+    Console.WriteLine("4 para Divisão");
+    Console.Write("Sua resposta: ");
     operacao = int.Parse(Console.ReadLine());
+    aux_operacao = operacao;
 
-    if (operacao == 1)
+    do
     {
-        adicao = numero_1 + numero_2;
-        Console.WriteLine($"\n{numero_1} + {numero_2} = {adicao} ");
-    } 
-    else if (operacao == 2)
-    {
-        subtracao = numero_1 - numero_2;
-        Console.WriteLine($"\n{numero_1} - {numero_2} = {subtracao} ");
-    }
-    else if (operacao == 3)
-    {
-        multiplicacao = numero_1 * numero_2;
-        Console.WriteLine($"\n{numero_1} * {numero_2} = {multiplicacao}");
-    }
-    else if (operacao == 4)
-    {
-        if (numero_1 == 0 || numero_2 == 0)
+        if (aux_operacao == 1)
         {
-
-            string mensagem = "Não é divisível por zero";
-            Console.WriteLine($"\n{numero_1} / {numero_2} = {mensagem}");
+            adicao = aux_1 + aux_2;
+            Console.WriteLine($"\n{aux_1} + {aux_2} = {adicao} ");
+            liberar_1 = true;
         }
-        else if (numero_2 < 0)
+        else if (aux_operacao == 2)
         {
-            string mensagem = "Não é divisível por número negativo";
-            Console.WriteLine($"\n{numero_1} / {numero_2} = {mensagem}");
+            subtracao = aux_1 - aux_2;
+            Console.WriteLine($"\n{aux_1} - {aux_2} = {subtracao} ");
+            liberar_1 = true;
+        }
+        else if (aux_operacao == 3)
+        {
+            multiplicacao = aux_1 * aux_2;
+            Console.WriteLine($"\n{aux_1} * {aux_2} = {multiplicacao}");
+            liberar_1 = true;
+        }
+        else if (aux_operacao == 4)
+        {
+            if (aux_1 == 0 || aux_2 == 0)
+            {
+
+                string mensagem = "Não é divisível por zero";
+                Console.WriteLine($"\n{aux_1} / {aux_2} = {mensagem}");
+            }
+            else
+            {
+                divisao = aux_1 / aux_2;
+                Console.WriteLine($"\n{aux_1} / {aux_2} = {divisao}");
+            }
+            liberar_1 = true;
         }
         else
         {
-            divisao = numero_1 / numero_2;
-            Console.WriteLine($"\n{numero_1} + {numero_2} = {adicao} ");
-            Console.WriteLine($"\n{numero_1} - {numero_2} = {subtracao} ");
-            Console.WriteLine($"\n{numero_1} * {numero_2} = {multiplicacao}");
-            Console.WriteLine($"\n{numero_1} / {numero_2} = {divisao}");
+            Console.WriteLine("\nOpção Inválida\n");
+            liberar_1 = false;
         }
-    }
 
-    Console.WriteLine("\n---------------------------------------x---------------------------------------");
-    
+        liberar_2 = false;
 
-    liberar = false;
-
-    while (liberar == false)
-    {
-        Console.WriteLine("\n---------------------------------------x---------------------------------------");
-        Console.WriteLine("\nDeseja encerrar? Digite: ");
-        Console.WriteLine("\n1 para SIM \n2 para NÃO");
-        escolha = int.Parse(Console.ReadLine());
-        
-        if (escolha == 1 || escolha == 2) {
-            
-            if (escolha == 1)
-            {
-                Console.WriteLine("\nAguarde...\n");
-                liberar = true;
-            } else
-            {
-                Console.WriteLine("\nContinuando...\n");
-                liberar = true;
-            }
-            
-        } else
+        while (liberar_2 == false)
         {
-            Console.WriteLine("\nOpção Inválida! \nTente novamente.");
+            Console.WriteLine("\n-------------------x-------------------");
+            Console.WriteLine("Deseja encerrar? Digite: ");
+            Console.WriteLine("\n1 para SIM \n2 para NÃO");
+            Console.Write("Sua escolha: ");
+            escolha = int.Parse(Console.ReadLine());
+
+            if (escolha == 1 || escolha == 2)
+            {
+
+                if (escolha == 1)
+                {
+                    Console.WriteLine("\nAguarde...");
+                    liberar_2 = true;
+                    Console.WriteLine("-------------------x-------------------");
+                }
+                else
+                {
+                    Console.WriteLine("\nContinuando...");
+                    liberar_2 = true;
+                    Console.WriteLine("-------------------x-------------------\n");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("\nOpção Inválida! \nTente novamente.");
+            }
         }
-    }
+    } while (liberar_2 != true);
+
 } while (escolha != 1);
 
 Console.WriteLine("\nPressione uma tecla para encerrar.");
